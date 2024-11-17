@@ -15,11 +15,11 @@ const Item = sequelize.define('Item', {
     allowNull: false,
   },
   picture: {
-    type: DataTypes.STRING, // URL or file path
+    type: DataTypes.STRING, 
     allowNull: true,
   },
 }, {
-  timestamps: true, // Adds createdAt and updatedAt
+  timestamps: true, 
 });
 
 module.exports = Item;

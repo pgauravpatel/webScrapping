@@ -3,11 +3,9 @@ const cheerio = require('cheerio');
 
 async function scrapeProperty(url) {
     try {
-        // Fetch the page content
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url); 
         const $ = cheerio.load(data);
 
-        // Select all property cards
         const properties = [];
         $('.mb-srp__list .mb-srp__card').each((index, element) => {
             const property = {};
@@ -30,20 +28,18 @@ async function scrapeProperty(url) {
                 .text()
                 .trim();
 
-            // Extract image URL (handle lazy-loading attributes)
             const imgElement = $(element).find('.mb-srp__card__photo__fig--graphic');
-            console.log('Image Element:', imgElement.html()); // Debugging: log the element
+            console.log('Image Element:', imgElement.html()); 
 
             property.picture = imgElement.attr('data-src') || imgElement.attr('src') || null;
-            console.log('Extracted Image URL:', property.picture); // Debugging: log the extracted URL
+            console.log('Extracted Image URL:', property.picture);
 
             properties.push(property);
         });
 
         console.log('Extracted Properties:', properties);
-        return properties; // Optional: return the data for further processing
+        return properties; 
     } catch (error) {
-        // Log detailed error information
         console.error('Error scraping the property:', error.message);
         return { status: 'Failed', error: error.message };
     }

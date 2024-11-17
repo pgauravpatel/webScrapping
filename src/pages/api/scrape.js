@@ -6,10 +6,10 @@ export default async function handler(req, res) {
         const { url } = req.body;
         console.log('abc')
         const scrapedData = await scrapeProperty(url);
-        console.log(scrapedData)
+        console.log(9,scrapedData)
         if (scrapedData && scrapedData.length > 0) {
             try {
-                await Item.sync({force:true})
+                // await Item.sync({force:true})
                 await Item.bulkCreate(scrapedData);
                 console.log('All properties saved successfully.');
             } catch (error) {
